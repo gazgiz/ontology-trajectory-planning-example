@@ -1,0 +1,39 @@
+[?result, rdf:type, :Result],
+[?result, :distanceInKm, ?distanceinkm],
+[?result, :hasWaypointIndex, ?wpIndex],
+[?result, :hasTimestampDifference, ?timestampDifference],
+[?dataPoint, :hasResults, ?result]:-
+ 
+    [?dataPoint, a, :DataPoint],
+    [?dataPoint, :hasTimestamp, ?dpTimestamp],
+    [?dataPoint, :hasDataPointCoordinates, ?dpCoordinates],
+    [?dpCoordinates, :hasLatitude, ?dpLatitude],
+    [?dpCoordinates, :hasLongitude, ?dpLongitude],
+ 
+    [?wayPoint, a, :Waypoint],
+    [?wayPoint, :hasWaypointTimestamp, ?wpTimestamp],
+    [?wayPoint, :hasWaypointIndex, ?wpIndex],
+    [?wayPoint, :hasWaypointCoordinates, ?wpCoordinates],
+    [?wpCoordinates, :hasAltitude, ?wpAltitude],
+    [?wpCoordinates, :hasLatitude, ?wpLatitude],
+    [?wpCoordinates, :hasLongitude, ?wpLongitude],
+
+    BIND (6671 AS ?radius) , #6371 + 300
+ 
+    BIND ((?dpLatitude * pi() / 180) AS ?dpLatitudeRad),
+    BIND ((?wpLatitude * pi() / 180) AS ?wpLatitudeRad),
+    BIND ((?dpLongitude * pi() / 180) AS ?dpLongitudeRad),
+    BIND ((?wpLongitude * pi() / 180) AS ?wpLongitudeRad),
+ 
+    BIND ((?wpLatitudeRad - ?dpLatitudeRad) / 2 AS ?deltaLat),
+    BIND ((?wpLongitudeRad - ?dpLongitudeRad) / 2 AS ?deltaLong),
+ 
+    BIND (sin(?deltaLat) * sin(?deltaLat) AS ?part1),
+    BIND (cos(?dpLatitudeRad) * cos(?wpLatitudeRad) AS ?part2),
+    BIND (sin(?deltaLong) * sin(?deltaLong) AS ?part3),
+ 
+    BIND (2 * ?radius * ASIN(sqrt(?part1 + (?part2 * ?part3))) AS ?distanceinkm),
+
+    BIND (?dpTimestamp - ?wpTimestamp AS ?timestampDifference),
+
+    SKOLEM(?dataPoint, ?wayPoint, ?result) .

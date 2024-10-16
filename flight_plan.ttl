@@ -1,0 +1,46 @@
+@prefix : <http://www.rdfox.com#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:flightplan001 a :FlightPlan ;
+    :hasArrivalAirport :gimpo_airport ;
+    :hasDepartureAirport :yeui-do_airport ;
+    :hasDepartureTime "2024-09-06T14:00:00"^^xsd:dateTime ;
+    :hasWaypoint :waypoint1,
+        :waypoint2 .
+
+:gimpo_airport a :Airport ;
+    :hasAirportCoordinates :gimpo_airport0d10d847-1c73-4dfe-8f78-7895d49afc0b .
+
+:gimpo_airport0d10d847-1c73-4dfe-8f78-7895d49afc0b a :Coordinates ;
+    :hasAltitude 0.0 ;
+    :hasLatitude 37.561725 ;
+    :hasLongitude 126.801109 .
+
+:waypoint1 a :Waypoint ;
+    :hasWaypointCoordinates :waypoint1167f9f86-4784-44fd-a0cf-754c50f38021 ;
+    :hasWaypointIndex 1 ;
+    :hasWaypointTimestamp "2024-09-06T14:01:00"^^xsd:dateTime .
+
+:waypoint1167f9f86-4784-44fd-a0cf-754c50f38021 a :Coordinates ;
+    :hasAltitude 300.0 ;
+    :hasLatitude 37.552743 ;
+    :hasLongitude 126.89724 .
+
+:waypoint2 a :Waypoint ;
+    :hasWaypointCoordinates :waypoint2f5c64412-62cd-44bb-9b63-19c81b4dcde9 ;
+    :hasWaypointIndex 2 ;
+    :hasWaypointTimestamp "2024-09-06T14:02:21"^^xsd:dateTime .
+
+:waypoint2f5c64412-62cd-44bb-9b63-19c81b4dcde9 a :Coordinates ;
+    :hasAltitude 300.0 ;
+    :hasLatitude 37.579413 ;
+    :hasLongitude 126.842308 .
+
+:yeui-do_airport a :Airport ;
+    :hasAirportCoordinates :yeui-do_airport57166567-7038-496c-bf96-e2ac8f91752e .
+
+:yeui-do_airport57166567-7038-496c-bf96-e2ac8f91752e a :Coordinates ;
+    :hasAltitude 0.0 ;
+    :hasLatitude 37.527426 ;
+    :hasLongitude 126.931572 .
+

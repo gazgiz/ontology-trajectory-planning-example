@@ -1,0 +1,10 @@
+dstore create default
+
+endpoint start
+
+prefix : <http://www.rdfox.com#>
+
+import ontology.ttl
+import flight_plan.ttl
+
+import rule1.dlog
